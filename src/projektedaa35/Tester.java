@@ -35,16 +35,21 @@ public class Tester {
 		long stopTime;
 		long res; 
 		
-		for (int i = 0; i < N; i++) {
-			
-			
-			int randIndex = (int) ((Math.random()+1)*N); 
+		ArrayList<Integer> randNums = new ArrayList<Integer>();
+		
+		for (int i = 0; i < ls.size(); i++) {
+			int randIndex = (int) ((Math.random())*ls.size()); 
 			int randNum = ls.get(randIndex);
+			randNums.add(randNum);
+		}
+		
+		for (int i = 0; i < N; i++) {
 			
 			startTime = System.nanoTime();	
 			// använder indexoff här för det är den form av sökning linkedlist har
-			
-			ls.indexOf(randNum);
+			for(int randNum : randNums) {
+				ls.indexOf(randNum);
+			}
 			
 	    	stopTime = System.nanoTime();
 	    	res = (stopTime - startTime) ;
@@ -53,8 +58,10 @@ public class Tester {
 	    	
 	    	// run tests for tree
 	    	startTime = System.nanoTime();
+	    	for(int randNum : randNums) {
+				ts.contains(randNum);
+			}
 	    	
-	    	ts.contains(randNum);
 	    	stopTime = System.nanoTime();
 	    	res = (stopTime - startTime) ;
 	    	
@@ -77,33 +84,37 @@ public class Tester {
 		long stopTime;
 		long res; 
 		
+		ArrayList<Integer> fileNumbers = new ArrayList<Integer>();
+		
+		Scanner fileScanner = new Scanner(file);
+		while (fileScanner.hasNextLine()) {
+			String data = fileScanner.nextLine();
+		    fileNumbers.add(Integer.parseInt(data));
+		}	
+		fileScanner.close();
+		
 		for (int i = 0; i < N; i++) {
 			LinkedList<Integer> tempList = new LinkedList<Integer>();
 			TreeSet<Integer> tempTree = new TreeSet<Integer>();
-			Scanner fileScanner = new Scanner(file);
 			
 			startTime = System.nanoTime();	
 			
-		    
-		    while (fileScanner.hasNextLine()) {
-		      String data = fileScanner.nextLine();
-		      tempList.add(Integer.parseInt(data));
-		    }	
+			for(int num : fileNumbers) {
+				tempList.add(num);
+			}
+			
 			
 	    	stopTime = System.nanoTime();
 	    	res = (stopTime - startTime) ;
 	    	
 	    	listRes.add(res);
 	    	
-	    	fileScanner = new Scanner(file);
-	    	// run tests for tree
 	    	startTime = System.nanoTime();
 	    	
-	    	 while (fileScanner.hasNextLine()) {
-		      String data = fileScanner.nextLine();
-		      tempTree.add(Integer.parseInt(data));
-		    }	
-	    	 
+	    	for(int num : fileNumbers) {
+				tempTree.add(num);
+			}
+	    	
 	    	stopTime = System.nanoTime();
 	    	res = (stopTime - startTime) ;
 	    	

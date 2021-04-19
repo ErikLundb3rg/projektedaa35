@@ -30,7 +30,7 @@ public class Main {
 		String f3Name = "indata1000000.txt";
 		
 		File actual = new File(f1Name);
-		int timesToTest = 100; 
+		int timesToTest = 30; 
 		
 		System.out.println("running");
 		
